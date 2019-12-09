@@ -16,7 +16,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "nodemon ./server/index.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,5 +33,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.7.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.13",
+    "nodemon": "^2.0.1"
   }
 }
