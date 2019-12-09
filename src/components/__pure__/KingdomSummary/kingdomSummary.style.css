@@ -1,0 +1,109 @@
+.summary-container {
+  height: 100%;
+  width: 45%;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.summary-container.reverse {
+  align-items: flex-start;
+}
+
+.summary {
+  position: relative;
+  height: 85%;
+  width: 100%;
+  background-color: #777777;
+  z-index: 2;
+  box-shadow: 0 30px 30px -15px black;
+}
+
+.summary .summary-image {
+  height: 100%;
+  width: 100%;
+
+  -webkit-filter: grayscale(75%);
+  filter:         grayscale(75%);
+}
+
+.summary .summary-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(30, 35, 44, .8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.battle-stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 15%;
+  width: 95%;
+  background-color: #1E232C;
+}
+
+
+.battle-stats span {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 50;
+  flex: 1;
+  font-size: 12px;
+  cursor: pointer;
+  color: #777777;
+}
+
+
+.battle-stats span * {
+  font-size: 14x;
+  color: #777777;
+  margin-bottom: 5px;
+}
+
+
+.battle-stats span.stats-logo {
+  font-size: 1.17em;
+  background-color: #A6A6A6;
+  color: #888888;
+}
+
+
+@media screen and (max-width: 683px) {
+  .summary-container {
+    height: 250px;
+    width: 85%;
+    flex-direction: row;
+  }
+  .summary-container.reverse {
+    flex-direction: row-reverse;
+  }
+
+  .summary-container .summary {
+    height: 100%;
+    box-shadow: 20px 0 25px -15px black;
+  }
+
+  .summary-container.reverse .summary {
+    height: 100%;
+    box-shadow: -20px 0 25px -15px black;
+  }
+
+  .battle-stats {
+    width: 15%;
+    flex-direction: column;
+    height: 95%;
+  }
+
+}

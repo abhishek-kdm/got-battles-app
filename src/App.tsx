@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
+import { AppContext } from './context';
+import SearchSection from './components/SearchSection/searchSection.component';
+import BattleSummary from './components/BattleSummary/battleSummary.component';
+
+
+interface RenderSectionProps {
+  battle: any
+}
+
+const RenderSection: React.FC<RenderSectionProps> = ({ battle }) => (
+  battle != null ? <BattleSummary /> : <SearchSection />
+);
+ 
+
 const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [battle, setBattle] = useState<any>(null);
+  return (<>
+    <AppContext.Provider value={{ battle, setBattle }}>
+      <div className='App'>
+        <header className='App-header'>
+          <RenderSection battle={battle} />
+        </header>
+      </div>
+    </AppContext.Provider>
+  </>);
 }
 
 export default App;
+
