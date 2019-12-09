@@ -6,7 +6,7 @@ const BattleRouter = Router();
 BattleRouter.route('/').get((_, res) => {
   Battle.find({})
     .then((battles) => res.send(battles))
-    .catch(() => { res.send('Server Error'); });
+    .catch(() => { res.status(500).send('Server Error'); });
 });
 
 
@@ -52,10 +52,7 @@ BattleRouter.route('/generic_search').get((req, res) => {
 
   Battle.find({ $and: andQuery })
     .then((battles) => res.json(battles))
-    .catch((err) => {
-      console.log(err);
-      res.send('Database Error');
-    });
+    .catch((err) => { res.status(500).send('Database Error'); });
 });
 
 
