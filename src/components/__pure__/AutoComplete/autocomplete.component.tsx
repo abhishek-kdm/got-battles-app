@@ -1,6 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 
 import './autocomplete.style.css';
+import { useKeyPress } from '../../../utils/hooks';
+import { autocompleteNavigate } from '../../../utils';
 
 
 interface AutoCompleteProps {
@@ -8,7 +10,8 @@ interface AutoCompleteProps {
   onSelect: (option: any) => void
   children: (
     isOpen: (a: any[]) => boolean,
-    optionProps: any
+    optionProps: any,
+    containerProps: any
   ) => JSX.Element | null
 }
 
@@ -17,6 +20,13 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   onSelect,
   children,
 }) => {
+  // hook tracking keypress.
+  const upArrowPressed = useKeyPress(38);
+  const downArrowPressed = useKeyPress(40);
+
+  const auInput = useRef<HTMLInputElement>(null);
+  const auContainer = useRef<HTMLElement>(null);
+
   const { value } = inputProps;
   
   const isOpen = useCallback((options) => {
@@ -34,10 +44,26 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
     onKeyPress: ({ which }: any) => { which === 13 && onSelect(option) },
   });
 
+  const containerProps = () => ({ ref: auContainer });
+
+
+  // arrow navigation side effect hooks.
+  useEffect(() => {
+    if (downArrowPressed) {
+      autocompleteNavigate.next(auInput.current, auContainer.current);
+    }
+  }, [downArrowPressed]);
+
+  useEffect(() => {
+    if (upArrowPressed) {
+      autocompleteNavigate.previous(auContainer.current);
+    }
+  }, [upArrowPressed]);
+
   return (<>
     <div className='autocomplete'>
-      <input {...inputProps} tabIndex={1} />
-      {children(isOpen, optionProps)}
+      <input {...inputProps} tabIndex={1} ref={auInput} />
+      {children(isOpen, optionProps, containerProps)}
     </div>
   </>);
 }

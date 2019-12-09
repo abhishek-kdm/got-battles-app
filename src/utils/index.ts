@@ -40,3 +40,33 @@ export const fancyNumber = (n: number | null): string => {
   }
   return '--';
 }
+
+export const autocompleteNavigate = {
+  next: (
+    inputElement: HTMLInputElement | null,
+    containerElement: HTMLElement | null
+  ) => {
+    const element = document.activeElement;
+    if (element) {
+      if (element === inputElement) {
+        if (element.nextSibling) {
+          // @ts-ignore
+          (element.nextSibling.firstChild || inputElement).focus();
+        }
+      } else if (element.parentNode === containerElement) {
+        // @ts-ignore
+        (element.nextSibling || element.parentNode.firstChild).focus();
+      }
+    }
+  },
+
+  previous: (containerElement: HTMLElement | null) => {
+    const element = document.activeElement;
+    if (element && (element.parentNode === containerElement)) {
+      // @ts-ignore
+      (element.previousSibling || element.parentNode.lastChild).focus();
+    }
+  },
+}
+
+

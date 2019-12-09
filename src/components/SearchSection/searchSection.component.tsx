@@ -56,9 +56,9 @@ const SearchSection: React.FC<SearchSectionProps> = () => {
         inputProps={searchInputProps}
         onSelect={setBattle}
       >
-        {(isOpen, optionProps) => (
+        {(isOpen, optionProps, containerProps) => (
           isOpen(options) ? (
-            <ul>
+            <ul {...containerProps()}>
               {options.map((option: any, key: number) => (
                 <li {...optionProps(option, key)}>
                   {constructString(option)}
