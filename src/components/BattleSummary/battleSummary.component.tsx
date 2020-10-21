@@ -4,7 +4,6 @@ import './battleSummary.style.css';
 import { AppContext } from '../../context';
 import KingdomSummary from '../__pure__/KingdomSummary/kingdomSummary.component';
 
-
 const Note: React.FC<{ children: string }> = ({ children }) => {
   return (children && children.length) ? (<>
     <hr style={{ width: '70%'}} />
@@ -16,10 +15,8 @@ const GoBack = (props: React.HTMLAttributes<HTMLButtonElement>) => (
   <button {...props} className={'go-back'}>&lang;</button>
 );
 
-
-
 interface BattleSummaryProps { }
- 
+
 const BattleSummary: React.SFC<BattleSummaryProps> = () => {
   const { battle, setBattle } = useContext(AppContext);
 
@@ -46,5 +43,5 @@ const BattleSummary: React.SFC<BattleSummaryProps> = () => {
     </section>
   </>);
 }
- 
+
 export default BattleSummary;

@@ -14,7 +14,7 @@ export const fetchJson: FetchJson = async (...args) => {
  * @description previous callback gets cancelled
  * and the new callback starts to evaluate
  * (if this gets called before delay, the delay is over).
- * 
+ *
  * using this for multiple callback functions is not a good idea right now.
  */
 export const refreshableCallback = (() => {

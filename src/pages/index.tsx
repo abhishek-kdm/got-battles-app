@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
-import './App.css';
+import './index.css';
+import '../styles/global.css';
 
-import { AppContext } from './context';
-import SearchSection from './components/SearchSection/searchSection.component';
-import BattleSummary from './components/BattleSummary/battleSummary.component';
+import { AppContext } from '../context';
+import SearchSection from '../components/SearchSection/searchSection.component';
+import BattleSummary from '../components/BattleSummary/battleSummary.component';
 
-
-interface RenderSectionProps {
-  battle: any
-}
+interface RenderSectionProps { battle: any }
 
 const RenderSection: React.FC<RenderSectionProps> = ({ battle }) => (
   battle != null ? <BattleSummary /> : <SearchSection />
 );
- 
 
-const App: React.FC = () => {
+const Home: React.FC = () => {
   const [battle, setBattle] = useState<any>(null);
   return (<>
     <AppContext.Provider value={{ battle, setBattle }}>
@@ -28,5 +25,5 @@ const App: React.FC = () => {
   </>);
 }
 
-export default App;
+export default Home;
 

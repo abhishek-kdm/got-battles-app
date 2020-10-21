@@ -52,7 +52,7 @@ BattleRouter.route('/generic_search').get((req, res) => {
 
   Battle.find({ $and: andQuery })
     .then((battles) => res.json(battles))
-    .catch((err) => { res.status(500).send('Database Error'); });
+    .catch((_) => { res.status(500).send('Database Error'); });
 });
 
 

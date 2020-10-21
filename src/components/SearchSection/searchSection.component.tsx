@@ -11,9 +11,8 @@ import {
 import { GENERIC_SEARCH_URL } from '../../configs';
 import { useComponentMountRef } from '../../utils/hooks';
 
-
 export interface SearchSectionProps { }
- 
+
 const SearchSection: React.FC<SearchSectionProps> = () => {
   const componentMounted = useComponentMountRef();
 

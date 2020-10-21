@@ -1,10 +1,11 @@
 env:
   browser: true
-  es6: true
   node: true
+  es6: true
 extends:
   - 'eslint:recommended'
   - 'plugin:react/recommended'
+  - 'plugin:react-hooks/recommended'
   - 'plugin:@typescript-eslint/eslint-recommended'
 globals:
   Atomics: readonly
@@ -17,17 +18,18 @@ parserOptions:
   sourceType: module
 plugins:
   - react
+  - 'react-hooks'
   - '@typescript-eslint'
 rules:
-  indent:
-    - error
-    - 2
-  linebreak-style:
-    - error
-    - windows
-  quotes:
+  quotes: 
     - error
     - single
-  semi:
+    - avoidEscape: true
+      allowTemplateLiterals: true
+  eol-last:
     - error
     - always
+  'react/prop-types':
+    'off'
+  'react/display-name':
+    'off'

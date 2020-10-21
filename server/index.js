@@ -5,15 +5,13 @@ const { connect, connection } = require('mongoose');
 
 const BattleRouter = require('./routes/battle.routes');
 
-
 // custom process env variables.
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config({ path: resolve(__dirname, '.env') });
 }
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 const MONGOOSE_URI = process.env.MONGO_ATLAS_URI;
-
 
 // mongo stuff.
 connect(MONGOOSE_URI, {
@@ -24,8 +22,6 @@ connect(MONGOOSE_URI, {
 connection.once('open', () => {
   console.log('MongoDB  connection established successfully.');
 });
-
-
 
 // express stuff.
 const app = express();
