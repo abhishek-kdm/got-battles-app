@@ -1,7 +1,7 @@
 {
   "name": "got-battles",
   "private": true,
-  "description": "Game of Thrones Battles (hiring challenge) ",
+  "description": "Game of Thrones Battles (hiring challenge).",
   "version": "0.1.0",
   "author": "Abhishek Kadam <abhishekk19@gmail.com>",
   "dependencies": {
@@ -22,6 +22,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
+    "sqlite3": "^5.0.0",
     "styled-components": "^5.1.0"
   },
   "devDependencies": {
@@ -34,7 +35,8 @@
     "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.19.0",
-    "eslint-plugin-react-hooks": "^3.0.0"
+    "eslint-plugin-react-hooks": "^3.0.0",
+    "nodemon": "^2.0.6"
   },
   "keywords": [
     "gatsby",
@@ -48,6 +50,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
     "start": "gatsby develop --host 0.0.0.0",
     "serve": "gatsby serve",
+    "server": "nodemon ./server/index.js",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },

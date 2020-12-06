@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+
 const { resolve } = require('path');
 const { connect, connection } = require('mongoose');
 
@@ -19,6 +20,7 @@ connect(MONGOOSE_URI, {
   useCreateIndex: true,
   useUnifiedTopology: true,
 });
+
 connection.once('open', () => {
   console.log('MongoDB  connection established successfully.');
 });
@@ -51,3 +53,4 @@ app.get('*', (_, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port: ${PORT}`);
 });
+

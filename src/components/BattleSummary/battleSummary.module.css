@@ -1,4 +1,4 @@
-section#battle-summary-section {
+.battle__summary_section {
   display: flex;
   flex-grow: 1;
   margin-left: 10px;
@@ -15,7 +15,7 @@ section#battle-summary-section {
   color: #777777;
 }
 
-.go-back {
+.goback {
   font-size: 24px!important;
   position: absolute;
   top: 0;
@@ -28,12 +28,12 @@ section#battle-summary-section {
   background-color: transparent;
 }
 
-.battle-location {
+.battle__location {
   margin-top: 1rem;
   color: #777777;
 }
 
-.battle-summary-wrapper {
+.battle__summary_wrapper {
   width: 100%;
   height: 60vh;
   display: flex;
@@ -41,7 +41,7 @@ section#battle-summary-section {
   justify-content: center;
 }
 
-.battle-title {
+.battle__title {
   height: 1.5em;
   width: 100%;
   margin: 0;
@@ -49,7 +49,7 @@ section#battle-summary-section {
   position: relative;
 }
 
-.battle-title > label {
+.battle__title > label {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,12 +64,12 @@ section#battle-summary-section {
 
 
 @media screen and (max-width: 683px) {
-  .battle-summary-wrapper {
+r .battle__summary_wrapper {
     height: 100%;
     flex-direction: column;
     align-items: center;
   }
-  .battle-title > label {
+  .battle__title > label {
     bottom: -30%;
   }
 
@@ -77,14 +77,13 @@ section#battle-summary-section {
 }
 
 @media screen and (min-width: 751px) {
-  .battle-summary-wrapper {
+  .battle__summary_wrapper {
     height: calc(100vw / 2);
   }
 }
 
-
 @media screen and (min-width: 950px) {
-  .battle-summary-wrapper {
+  .battle__summary_wrapper {
     width: 950px;
     height: 475px;
   }

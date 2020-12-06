@@ -66,37 +66,7 @@ input:focus {
   box-shadow: 10px 10px 25px 15px rgba(0, 0, 0, .4);
 }
 
-.medium {
-  font-size: 15px;
-}
-
-.smaller {
-  font-size: 12px;
-}
-
 hr {
   border: 1px solid #6F6F6F;
-}
-
-.container {
-  text-align: center;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-@media (min-width: 768px) {
-  .container {
-    width: 750px;
-  }
-}
-@media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
-}
-@media (min-width: 1200px) {
-  .container {
-    width: 1170px;
-  }
 }
 

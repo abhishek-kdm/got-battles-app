@@ -1,20 +1,20 @@
-const package = require('./package.json');
+const Package = require('./package');
 
 module.exports = {
   siteMetadata: {
     title: `Game of Thrones Battles.`,
-    description: package.description,
+    description: Package.description,
     author: `@lycuid`,
   },
-  pathPrefix: `/p/${package.name}`,
+  pathPrefix: `/p/${Package.name}`,
   assetPrefix: `https://cdn.lycuid.dev`,
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        name: `Images`,
+        path: `${__dirname}/src/Images`,
       },
     },
     `gatsby-transformer-sharp`,
@@ -22,13 +22,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: package.name,
-        short_name: package.name,
+        name: Package.name,
+        short_name: Package.name,
         start_url: `/`,
         background_color: `#70a1ff`,
         theme_color: `#d59f78`,
         display: `minimal-ui`,
-        icon: `src/images/icon.png`, // This path is relative to the root of the site.
+        icon: `src/Images/icon.png`, // This path is relative to the root of the site.
       },
     },
     {

@@ -1,5 +1,6 @@
-import * as React from 'react';
-import './kingdomSummary.style.css';
+import React, { useMemo } from 'react';
+import style from './kingdomSummary.module.css';
+import globalStyle from './kingdomSummary.module.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -12,7 +13,6 @@ import {
 import ImgCircle from '../ImgCircle/imgCircle.component';
 import { fancyNumber } from '../../../utils';
 
-
 interface KingdomSummaryProps {
   battle: any
   battleRole: string
@@ -23,7 +23,10 @@ const KingdomSummary: React.FC<KingdomSummaryProps> = ({
   battleRole,
   reverse,
 }) => {
-  const className = 'summary-container' + (reverse ? ' reverse' : '');
+  const classes = useMemo(() => [
+    style.summary__container,
+    reverse ? 'reverse' : ''
+  ].join(' '), [reverse]);
 
   const warriors = [
     battle[`${battleRole}_1`],
@@ -33,22 +36,22 @@ const KingdomSummary: React.FC<KingdomSummaryProps> = ({
   ];
 
   const color = (
-    (battleRole === 'attacker' && battle.attacker_outcome === 'win') || 
+    (battleRole === 'attacker' && battle.attacker_outcome === 'win') ||
     (battleRole === 'defender' && battle.attacker_outcome === 'loss')
   ) ? '#7BEFB2' : '#F03434';
 
   return (<>
-    <div className={className}>
-      <div className='summary'>
+    <div className={classes}>
+      <div className={style.summary}>
         {battle[`${battleRole}_king_bg`] && (<>
           <img
-            className='summary-image'
+            className={style.summary__image}
             src={battle[`${battleRole}_king_bg`]}
             alt={battle[`${battleRole}_king`]}
             title={battle[`${battleRole}_king`]}
           />
         </>)}
-        <div className='summary-overlay'>
+        <div className={style.summary__overlay}>
           <ImgCircle
             size={5}
             progress={100}
@@ -56,18 +59,20 @@ const KingdomSummary: React.FC<KingdomSummaryProps> = ({
             circleColor={color}
           />
           <hr style={{ width: '40%' }} />
-          <small className='medium'>{battle[`${battleRole}_king`]}</small>
-          <small className='smaller'>
+          <small className={globalStyle.medium}>
+            {battle[`${battleRole}_king`]}
+          </small>
+          <small className={globalStyle.smaller}>
             {warriors
               .filter((x) => x && x.trim().length > 0)
               .join(', ')}
           </small>
         </div>
       </div>
-      <div className='battle-stats'>
+      <div className={style.battle__stats}>
         {!reverse && (
           <span
-            className='stats-logo'
+            className={style.stats__logo}
             title={battle[`${battleRole}_king`] || '--'}
           >
             <FontAwesomeIcon icon={faSynagogue} />
@@ -87,7 +92,7 @@ const KingdomSummary: React.FC<KingdomSummaryProps> = ({
         </span>
         {reverse && (
           <span
-            className='stats-logo'
+            className={style.stats__logo}
             title={battle[`${battleRole}_king`] || '--'}
           >
             <FontAwesomeIcon icon={faSynagogue} />
@@ -99,3 +104,4 @@ const KingdomSummary: React.FC<KingdomSummaryProps> = ({
 }
 
 export default KingdomSummary;
+

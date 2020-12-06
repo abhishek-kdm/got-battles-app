@@ -5,14 +5,14 @@
   animation: progress 1.5s ease-out forwards;
 }
 
-.img-overlay {
+.img__overlay {
   position: relative;
   display: inline-block;
   width: 175px;
   height: 175px;
 }
 
-.img-overlay img {
+.img__overlay img {
   display: block;
   position: absolute;
   width: 100%;
@@ -22,7 +22,7 @@
   filter:         grayscale(75%);
 }
 
-.img-overlay svg {
+.img__overlay svg {
   display: block;
   position: absolute;
   top: 0;

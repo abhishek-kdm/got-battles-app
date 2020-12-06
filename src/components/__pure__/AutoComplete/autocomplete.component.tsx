@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
+import style from './autocomplete.module.css';
 
-import './autocomplete.style.css';
 import { useKeyPress } from '../../../utils/hooks';
 import { autocompleteNavigate } from '../../../utils';
 
@@ -61,7 +61,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   }, [upArrowPressed]);
 
   return (<>
-    <div className='autocomplete'>
+    <div className={style.autocomplete}>
       <input {...inputProps} tabIndex={1} ref={auInput} />
       {children(isOpen, optionProps, containerProps)}
     </div>

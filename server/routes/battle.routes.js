@@ -10,7 +10,7 @@ BattleRouter.route('/').get((_, res) => {
 });
 
 
-BattleRouter.route('/generic_search').get((req, res) => {
+BattleRouter.route('/search').get((req, res) => {
   const { param } = req.query;
 
   const keywords = param.replace(/\s+/g, ' ').split(' ');

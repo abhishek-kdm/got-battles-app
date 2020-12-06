@@ -1,4 +1,4 @@
-.summary-container {
+.summary__container {
   height: 100%;
   width: 45%;
   background-color: transparent;
@@ -8,7 +8,7 @@
   align-items: flex-end;
 }
 
-.summary-container.reverse {
+.reverse {
   align-items: flex-start;
 }
 
@@ -21,7 +21,7 @@
   box-shadow: 0 30px 30px -15px black;
 }
 
-.summary .summary-image {
+.summary__image {
   height: 100%;
   width: 100%;
 
@@ -29,7 +29,7 @@
   filter:         grayscale(75%);
 }
 
-.summary .summary-overlay {
+.summary__overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -43,7 +43,7 @@
 }
 
 
-.battle-stats {
+.battle__stats {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -53,7 +53,7 @@
 }
 
 
-.battle-stats span {
+.battle__stats span {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -66,14 +66,14 @@
 }
 
 
-.battle-stats span * {
+.battle__stats span * {
   font-size: 14x;
   color: #777777;
   margin-bottom: 5px;
 }
 
 
-.battle-stats span.stats-logo {
+span.stats__logo {
   font-size: 1.17em;
   background-color: #A6A6A6;
   color: #888888;
@@ -81,26 +81,26 @@
 
 
 @media screen and (max-width: 683px) {
-  .summary-container {
+  .summary__container {
     height: 250px;
     width: 85%;
     flex-direction: row;
   }
-  .summary-container.reverse {
+  .reverse {
     flex-direction: row-reverse;
   }
 
-  .summary-container .summary {
+  .summary {
     height: 100%;
     box-shadow: 20px 0 25px -15px black;
   }
 
-  .summary-container.reverse .summary {
+  .reverse .summary {
     height: 100%;
     box-shadow: -20px 0 25px -15px black;
   }
 
-  .battle-stats {
+  .battle__stats {
     width: 15%;
     flex-direction: column;
     height: 95%;
