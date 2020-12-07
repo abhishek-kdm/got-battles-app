@@ -35,7 +35,6 @@ const BattleSummary: React.FC<BattleSummaryProps> = ({ location }) => {
 
   return (<>
     <section
-      id={'battle-summary-section'}
       className={[
         globalStyle.container,
         style.battle__summary_section

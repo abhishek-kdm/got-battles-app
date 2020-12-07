@@ -9,9 +9,11 @@
 .title {
   width: 100%;
   margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
 }
 
-.title img {
+.title__img {
   width: 50%;
 }
 
@@ -26,7 +28,7 @@
 }
 
 @media screen and (max-width: 673px) {
-  .title img {
+  .title__img {
     width: 80%;
   }
 }
