@@ -1,13 +1,4 @@
-import { useRef, useEffect, useState, useCallback } from 'react'
-
-
-export const useComponentMountRef = () => {
-  const componentMounted = useRef<boolean>(true);
-  // cDM
-  useEffect(() => (() => { componentMounted.current = false }), []);
-  return componentMounted;
-}
-
+import { useEffect, useState, useCallback } from 'react'
 
 export const useKeyPress = (targetKeyCode: number) => {
   const [keyEvent, setKeyEvent] = useState<boolean>(false);

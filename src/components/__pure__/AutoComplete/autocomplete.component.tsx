@@ -46,7 +46,6 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
 
   const containerProps = () => ({ ref: auContainer });
 
-
   // arrow navigation side effect hooks.
   useEffect(() => {
     if (downArrowPressed) {

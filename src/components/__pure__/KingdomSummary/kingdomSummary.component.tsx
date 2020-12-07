@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import style from './kingdomSummary.module.css';
-import globalStyle from './kingdomSummary.module.css';
+import globalStyle from '../../../styles/global.module.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -25,7 +25,7 @@ const KingdomSummary: React.FC<KingdomSummaryProps> = ({
 }) => {
   const classes = useMemo(() => [
     style.summary__container,
-    reverse ? 'reverse' : ''
+    reverse ? style.reverse : ''
   ].join(' '), [reverse]);
 
   const warriors = [

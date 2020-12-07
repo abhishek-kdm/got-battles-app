@@ -9,10 +9,8 @@ BattleRouter.route('/').get((_, res) => {
     .catch(() => { res.status(500).send('Server Error'); });
 });
 
-
 BattleRouter.route('/search').get((req, res) => {
   const { param } = req.query;
-
   const keywords = param.replace(/\s+/g, ' ').split(' ');
 
   const fields = [
@@ -34,12 +32,6 @@ BattleRouter.route('/search').get((req, res) => {
     'region',
   ];
 
-  /**
-   * @description
-   * $and
-   *    $or [ { field1: keyword1 }, { field2: keyword1 }, ... ]
-   *    $or [ { field1: keyword2 }, { field2: keyword2 }, ... ]
-   */
   const andQuery = keywords.reduce((acc, keyword) => {
     acc.push({
       $or: fields.map((field) => {
@@ -55,6 +47,11 @@ BattleRouter.route('/search').get((req, res) => {
     .catch((_) => { res.status(500).send('Database Error'); });
 });
 
+BattleRouter.route('/:id').get(({ params }, res) => {
+  Battle.findOne({ _id: params.id })
+    .then((battle) => res.send(battle))
+    .catch((_) => { res.status(500).send('Server Error'); });
+});
 
 module.exports = BattleRouter;
 

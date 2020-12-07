@@ -3,7 +3,7 @@
   min-height: 100vh;
 }
 
-.App-header {
+.App__header {
   background: transparent;
   min-height: 90vh;
   display: flex;
@@ -14,11 +14,17 @@
   font-size: calc(10px + 2vmin);
 }
 
-.App-header * { color: whitesmoke; }
+.App__header * { color: whitesmoke; }
 
-.App-header > section {
+.App__header > div:first-of-type {
+  display: flex;
+  flex: 1;
   width: 100%;
-  opacity: 0;
+  height: 100%;
+}
+
+.App__header section {
+  flex: 1;
   animation-duration: 1s;
   animation-fill-mode: both;
   animation-name: fadeInUp;

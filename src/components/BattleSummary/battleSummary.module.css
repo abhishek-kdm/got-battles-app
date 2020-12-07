@@ -25,6 +25,7 @@
   color: dodgerblue;
   border: none;
   outline: none;
+  text-decoration: none;
   background-color: transparent;
 }
 
@@ -64,8 +65,7 @@
 
 
 @media screen and (max-width: 683px) {
-r .battle__summary_wrapper {
-    height: 100%;
+  .battle__summary_wrapper {
     flex-direction: column;
     align-items: center;
   }

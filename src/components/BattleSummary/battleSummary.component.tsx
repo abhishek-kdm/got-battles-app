@@ -1,9 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import style from './battleSummary.module.css';
 import globalStyle from '../../styles/global.module.css';
 
-import { AppContext } from '../../context';
+import { PageProps as GatsbyPageProps, Link } from 'gatsby';
+
 import KingdomSummary from '../__pure__/KingdomSummary/kingdomSummary.component';
+import { AppContext } from '../../context';
+import { fetchJson } from '../../utils';
+import { SERVER_URI } from '../../configs';
 
 const Note: React.FC<{ children: string }> = ({ children }) => {
   return (children && children.length) ? (<>
@@ -12,24 +16,32 @@ const Note: React.FC<{ children: string }> = ({ children }) => {
   </>) : null;
 }
 
-const GoBack = (props: React.HTMLAttributes<HTMLButtonElement>) => (
-  <button {...props} className={style.goback}>&lang;</button>
-);
+interface BattleSummaryProps extends GatsbyPageProps { }
 
-interface BattleSummaryProps { }
-
-const BattleSummary: React.FC<BattleSummaryProps> = () => {
+const BattleSummary: React.FC<BattleSummaryProps> = ({ location }) => {
   const { battle, setBattle } = useContext(AppContext);
 
+  useEffect(() => {
+    if (!battle) {
+      const id = location.search.split('?')[1].split('=')[1];
+      const url = `${SERVER_URI}/battle/${id}`;
+      fetchJson(url).then(setBattle);
+    }
+  }, [battle, location]);
+
+  if (!battle) {
+    return null;
+  }
+
   return (<>
-  <section
-    id={'battle-summary-section'}
-    className={[
-      globalStyle.container,
-      style.battle__summary_section
-    ].join(' ')}
-  >
-      <GoBack onClick={() => { setBattle(null) }} />
+    <section
+      id={'battle-summary-section'}
+      className={[
+        globalStyle.container,
+        style.battle__summary_section
+      ].join(' ')}
+    >
+      <Link to='/' className={style.goback}>&lang;</Link>
 
       <h2 className={style.battle__title}>
         <label>{battle.name}</label>
