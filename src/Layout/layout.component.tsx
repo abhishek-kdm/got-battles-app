@@ -9,11 +9,9 @@ const Layout: React.FC = ({ children }) => {
 
   return (<>
     <AppContext.Provider value={{ battle, setBattle }}>
-      <div className={style.App}>
-        <header className={style.App__header}>
-          {children}
-        </header>
-      </div>
+      <main className={style.main}>
+        <header>{children}</header>
+      </main>
     </AppContext.Provider>
   </>);
 }

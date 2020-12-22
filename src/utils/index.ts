@@ -19,10 +19,7 @@ export const fetchJson: FetchJson = async (...args) => {
  */
 export const refreshableCallback = (() => {
   let t: any;
-  return (
-    f: (...a: any[]) => void | Promise<void>,
-    delay: number
-  ) => {
+  return (f: (...a: any[]) => void | Promise<void>, delay: number) => {
     clearTimeout(t);
     t = (() => setTimeout(f, delay))();
   }
@@ -67,6 +64,20 @@ export const autocompleteNavigate = {
       (element.previousSibling || element.parentNode.lastChild).focus();
     }
   },
+}
+
+export const pareseUrlParams = (urlParamString: string): { [key: string]: string } => {
+  if (urlParamString.startsWith('?')) {
+    urlParamString = urlParamString.slice(1);
+  }
+
+  return urlParamString
+    .split('&')
+    .reduce((a, s) => {
+      const [s1, s2] = s.split('=');
+      a[s1] = s2;
+      return a;
+    }, {} as any);
 }
 
 

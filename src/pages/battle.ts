@@ -1,2 +1,2 @@
-export { default } from "../components/BattleSummary/battleSummary.component";
+export { default } from "../components/Battle/battle.component";
 

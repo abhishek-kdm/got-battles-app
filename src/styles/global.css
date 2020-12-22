@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Merriweather&display=swap');
 
 * {
-  font-family: 'Merriweather', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Merriweather', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 html, body {
@@ -17,8 +16,63 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+header {
+  background: transparent;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 25px;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+header * { color: whitesmoke; }
+
+/* gatsby-focus-wrapper. */
+header > div:first-of-type {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+}
+
+header section {
+  display: flex;
+  flex: 1;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: fadeInUp;
+}
+
+input {
+  outline: none;
+  padding: 15px;
+  border-radius: 6px;
+  border: none;
+  background-color: whitesmoke;
+  color: black !important;
+  font-size: large;
+}
+
+input:hover,
+input:focus {
+  box-shadow: 10px 10px 25px 15px rgba(0, 0, 0, .4);
+}
+
+hr {
+  border: 1px solid #6F6F6F;
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translate3d(0, 60px, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
 }
 
 /* Placeholder */
@@ -49,24 +103,5 @@ code {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(105, 105, 105);
-}
-
-input {
-  outline: none;
-  padding: 15px;
-  border-radius: 6px;
-  border: none;
-  background-color: whitesmoke;
-  color: black !important;
-  font-size: large;
-}
-
-input:hover,
-input:focus {
-  box-shadow: 10px 10px 25px 15px rgba(0, 0, 0, .4);
-}
-
-hr {
-  border: 1px solid #6F6F6F;
 }
 

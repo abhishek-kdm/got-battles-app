@@ -1,13 +1,13 @@
-import React, { useEffect, useContext } from 'react';
-import style from './battleSummary.module.css';
-import globalStyle from '../../styles/global.module.css';
-
+import React, { useEffect, useState, useContext } from 'react';
 import { PageProps as GatsbyPageProps, Link } from 'gatsby';
+
+import style from './battle.module.css';
+import globalStyle from '../../styles/global.module.css';
 
 import KingdomSummary from '../__pure__/KingdomSummary/kingdomSummary.component';
 import { AppContext } from '../../context';
-import { fetchJson } from '../../utils';
-import { SERVER_URI } from '../../configs';
+import { fetchJson, pareseUrlParams } from '../../utils';
+import { BATTLE_LIST_API } from '../../configs';
 
 const Note: React.FC<{ children: string }> = ({ children }) => {
   return (children && children.length) ? (<>
@@ -20,17 +20,36 @@ interface BattleSummaryProps extends GatsbyPageProps { }
 
 const BattleSummary: React.FC<BattleSummaryProps> = ({ location }) => {
   const { battle, setBattle } = useContext(AppContext);
+  const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
     if (!battle) {
-      const id = location.search.split('?')[1].split('=')[1];
-      const url = `${SERVER_URI}/battle/${id}`;
-      fetchJson(url).then(setBattle);
+      var id = pareseUrlParams(location.search).id;
+      if (id) {
+        fetchJson(BATTLE_LIST_API(id))
+          .then(setBattle)
+          .catch(() => setError(true));
+      } else {
+        setError(true);
+      }
     }
   }, [battle, location]);
 
+  if (error) {
+    return (<>
+      <div className={globalStyle.center} style={{ flexDirection: 'column',  alignItems: 'center' }}>
+        <h2>{'Not Found'}</h2>
+        <small><sub><Link to={'/'}>{'go home'}</Link></sub></small>
+      </div>
+    </>)
+  }
+
   if (!battle) {
-    return null;
+    return (<>
+      <div className={globalStyle.center}>
+        <code className={globalStyle.loader} />
+      </div>
+    </>)
   }
 
   return (<>

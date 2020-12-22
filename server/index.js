@@ -45,10 +45,6 @@ if (process.env.NODE_ENV === 'production') {
 
 // routes
 app.use('/battle', BattleRouter);
-// 404.
-app.get('*', (_, res) => {
-  res.sendFile(resolve(__dirname, '404.html'));
-});
 
 app.listen(PORT, () => {
   console.log(`Server running on port: ${PORT}`);
