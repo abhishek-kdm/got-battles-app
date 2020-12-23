@@ -31,18 +31,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// using the default create react app dev server
-// during non-production use.
-if (process.env.NODE_ENV === 'production') {
-  const PUBLIC_PATH = resolve(__dirname, '..', 'build');
-
-  app.use(express.static(resolve(PUBLIC_PATH)));
-
-  app.get('/', (_, res) => {
-    res.sendFile(resolve(PUBLIC_PATH, 'index.html'));
-  });
-}
-
 // routes
 app.use('/battle', BattleRouter);
 
