@@ -1,0 +1,32 @@
+{
+  "name": "server",
+  "private": true,
+  "description": "Game of Thrones Battles Server (hiring challenge).",
+  "version": "0.1.0",
+  "author": "Abhishek Kadam <abhishekk19@gmail.com>",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.9"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.6"
+  },
+  "keywords": [
+    "game-of-thrones",
+    "Game of Thrones"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./server/index.js",
+    "start:dev": "nodemon ./server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lycuid/got-battles"
+  },
+  "bugs": {
+    "url": "https://github.com/lycuid/got-battles/issues"
+  }
+}
