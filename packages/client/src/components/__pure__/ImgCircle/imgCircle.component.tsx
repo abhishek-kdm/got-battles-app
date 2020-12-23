@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './imgCircle.module.css';
+import styles from './imgCircle.module.css';
 
 interface ImgCircleProps {
   size: number
@@ -23,11 +23,11 @@ const ImgCircle: React.FC<ImgCircleProps> = ({
   const fillPercent = circumference * progress / 100;
 
   return (<>
-    <div className={style.img__overlay}>
+    <div className={styles.img__overlay}>
       <img src={imageUrl} alt='' />
       <svg viewBox={`0 0 ${size} ${size}`}>
         <path
-          className={style.circle}
+          className={styles.circle}
           d={`M${dx} ${dy}
             a ${radius} ${radius} 0 0 1 0 ${diameter}
             a ${radius} ${radius} 0 0 1 0 -${diameter}`}

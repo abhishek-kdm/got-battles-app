@@ -1,7 +1,8 @@
 import React from 'react';
-// eslint-disable-next-line no-unused-vars
 import Helmet, { HelmetProps } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
+
+import { fontFaceString } from '../utils';
 
 interface HeadProps extends HelmetProps {
   description?: string
@@ -15,21 +16,9 @@ const Head: React.FC<HeadProps> = ({
   children,
   ...rest
 }) => {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
-      }
-    `
-  );
+  const { site, allFile: { fonts }} = useStaticQuery(gqlQuery);
 
-  title = title || site.siteMetadata.title
+  title = title || site.siteMetadata.title;
   description = description || site.siteMetadata.description;
 
   return (
@@ -37,6 +26,7 @@ const Head: React.FC<HeadProps> = ({
       title={title}
       titleTemplate={absoluteTitle ? '%s' : `%s | ${description}`}
       htmlAttributes={{ lang: 'en' }}
+      style={[{ cssText: fonts.map(fontFaceString).join('') }]}
     >
       <meta name={`description`} content={description} />
       <meta property={`og:title`} content={title} />
@@ -50,6 +40,27 @@ const Head: React.FC<HeadProps> = ({
     </Helmet>
   )
 }
+
+const gqlQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+        description
+        author
+      }
+    }
+    allFile(filter: {sourceInstanceName: {eq: "fonts"}}) {
+      fonts: edges {
+        node {
+          name
+          publicURL
+          extension
+        }
+      }
+    }
+  }
+`;
 
 export default Head;
 

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import style from './layout.module.css';
 import '../styles/global.css';
 
+import Head from '../components/head';
+
 import { AppContext } from '../context';
 
 const Layout: React.FC = ({ children }) => {
@@ -9,6 +11,7 @@ const Layout: React.FC = ({ children }) => {
 
   return (<>
     <AppContext.Provider value={{ battle, setBattle }}>
+      <Head />
       <main className={style.main}>
         <header>{children}</header>
       </main>

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import style from './kingdomSummary.module.css';
+import styles from './kingdomSummary.module.css';
 import globalStyle from '../../../styles/global.module.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,8 +24,8 @@ const KingdomSummary: React.FC<KingdomSummaryProps> = ({
   reverse,
 }) => {
   const classes = useMemo(() => [
-    style.summary__container,
-    reverse ? style.reverse : ''
+    styles.summary__container,
+    reverse ? styles.reverse : ''
   ].join(' '), [reverse]);
 
   const warriors = [
@@ -42,16 +42,16 @@ const KingdomSummary: React.FC<KingdomSummaryProps> = ({
 
   return (<>
     <div className={classes}>
-      <div className={style.summary}>
+      <div className={styles.summary}>
         {battle[`${battleRole}_king_bg`] && (<>
           <img
-            className={style.summary__image}
+            className={styles.summary__image}
             src={battle[`${battleRole}_king_bg`]}
             alt={battle[`${battleRole}_king`]}
             title={battle[`${battleRole}_king`]}
           />
         </>)}
-        <div className={style.summary__overlay}>
+        <div className={styles.summary__overlay}>
           <ImgCircle
             size={5}
             progress={100}
@@ -69,10 +69,10 @@ const KingdomSummary: React.FC<KingdomSummaryProps> = ({
           </small>
         </div>
       </div>
-      <div className={style.battle__stats}>
+      <div className={styles.battle__stats}>
         {!reverse && (
           <span
-            className={style.stats__logo}
+            className={styles.stats__logo}
             title={battle[`${battleRole}_king`] || '--'}
           >
             <FontAwesomeIcon icon={faSynagogue} />
@@ -92,7 +92,7 @@ const KingdomSummary: React.FC<KingdomSummaryProps> = ({
         </span>
         {reverse && (
           <span
-            className={style.stats__logo}
+            className={styles.stats__logo}
             title={battle[`${battleRole}_king`] || '--'}
           >
             <FontAwesomeIcon icon={faSynagogue} />

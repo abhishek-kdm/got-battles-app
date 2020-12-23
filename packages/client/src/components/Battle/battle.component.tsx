@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { PageProps as GatsbyPageProps, Link } from 'gatsby';
 
-import style from './battle.module.css';
+import styles from './battle.module.css';
 import globalStyle from '../../styles/global.module.css';
 
 import KingdomSummary from '../__pure__/KingdomSummary/kingdomSummary.component';
@@ -12,7 +12,7 @@ import { BATTLE_LIST_API } from '../../configs';
 const Note: React.FC<{ children: string }> = ({ children }) => {
   return (children && children.length) ? (<>
     <hr style={{ width: '70%'}} />
-    <div className={style.note}>{children}</div>
+    <div className={styles.note}>{children}</div>
   </>) : null;
 }
 
@@ -56,21 +56,21 @@ const BattleSummary: React.FC<BattleSummaryProps> = ({ location }) => {
     <section
       className={[
         globalStyle.container,
-        style.battle__summary_section
+        styles.battle__summary_section
       ].join(' ')}
     >
-      <Link to='/' className={style.goback}>&lang;</Link>
+      <Link to='/' className={styles.goback}>&lang;</Link>
 
-      <h2 className={style.battle__title}>
+      <h2 className={styles.battle__title}>
         <label>{battle.name}</label>
       </h2>
 
-      <div className={style.battle__summary_wrapper}>
+      <div className={styles.battle__summary_wrapper}>
         <KingdomSummary battle={battle} battleRole={'attacker'} />
         <KingdomSummary battle={battle} battleRole={'defender'} reverse />
       </div>
 
-      <span className={style.battle__location}>
+      <span className={styles.battle__location}>
         {`${battle.battle_type} at `}
         {battle.location ? battle.location + ', ' : ''}
         {battle.region}

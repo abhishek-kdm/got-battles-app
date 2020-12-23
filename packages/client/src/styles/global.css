@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Merriweather&display=swap');
-
 * {
   font-family: 'Merriweather', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
@@ -38,8 +36,6 @@ header > div:first-of-type {
 }
 
 header section {
-  display: flex;
-  flex: 1;
   animation-duration: 1s;
   animation-fill-mode: both;
   animation-name: fadeInUp;
