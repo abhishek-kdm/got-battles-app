@@ -16,7 +16,7 @@ export interface SearchSectionProps extends GatsbyPageProps { }
 const SearchSection: React.FC<SearchSectionProps> = () => {
   const { GotBanner } = useStaticQuery(gqlQuery);
 
-  const { setBattle } = useContext(AppContext)
+  const { setBattle } = useContext(AppContext);
   const [value, setValue]     = useState<string>('');
   const [options, setOptions] = useState<any>([]);
 
