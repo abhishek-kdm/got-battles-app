@@ -83,6 +83,7 @@ export const pareseUrlParams = (urlParamString: string): { [key: string]: string
 export const fontFaceString = ({ node }: any) => `
 @font-face {
   font-family: "${node.name}";
+  font-display: swap;
   src: local("${node.publicURL}"),
     url("${node.publicURL}") format("${node.extension}");
 }

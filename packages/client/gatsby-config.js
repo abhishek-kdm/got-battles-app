@@ -1,4 +1,4 @@
-const Package = require('./package');
+const Package = require('../../package');
 
 module.exports = {
   siteMetadata: {
