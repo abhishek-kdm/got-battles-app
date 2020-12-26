@@ -71,3 +71,6 @@ yarn-error.log
 
 .env
 yarn.lock
+
+# Local Netlify folder
+.netlify
