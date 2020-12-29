@@ -2,12 +2,12 @@ import React, { useEffect, useState, useContext } from 'react';
 import { PageProps as GatsbyPageProps, Link } from 'gatsby';
 
 import styles from './battle.module.css';
-import globalStyle from '../../styles/global.module.css';
+import globalStyles from '../../styles/global.module.css';
 
 import KingdomSummary from '../__pure__/KingdomSummary/kingdomSummary.component';
 import { AppContext } from '../../context';
 import { fetchJson, pareseUrlParams } from '../../utils';
-import { BATTLE_LIST_API } from '../../configs';
+import { GraphqlOptions, SERVER_URI } from '../../configs';
 
 const Note: React.FC<{ children: string }> = ({ children }) => {
   return (children && children.length) ? (<>
@@ -15,6 +15,14 @@ const Note: React.FC<{ children: string }> = ({ children }) => {
     <div className={styles.note}>{children}</div>
   </>) : null;
 }
+
+export const query = `
+query FilteredBattles($id: String!) {
+  battle(id: $id) {
+    ${GraphqlOptions.commonQueryFields}
+  }
+}
+`;
 
 interface BattleSummaryProps extends GatsbyPageProps { }
 
@@ -24,10 +32,14 @@ const BattleSummary: React.FC<BattleSummaryProps> = ({ location }) => {
 
   useEffect(() => {
     if (!battle) {
-      var id = pareseUrlParams(location.search).id;
+      const id = pareseUrlParams(location.search).id;
       if (id) {
-        fetchJson(BATTLE_LIST_API(id))
-          .then(setBattle)
+        fetchJson(SERVER_URI, {
+          method: 'POST',
+          body: JSON.stringify({ query, variables: { id } }),
+          headers: GraphqlOptions.commonHeaders,
+        })
+          .then(({ data }: any) => setBattle(data.battle))
           .catch(() => setError(true));
       } else {
         setError(true);
@@ -37,7 +49,7 @@ const BattleSummary: React.FC<BattleSummaryProps> = ({ location }) => {
 
   if (error) {
     return (<>
-      <div className={globalStyle.center} style={{ flexDirection: 'column',  alignItems: 'center' }}>
+      <div className={globalStyles.center} style={{ flexDirection: 'column',  alignItems: 'center' }}>
         <h2>{'Not Found'}</h2>
         <small><sub><Link to={'/'}>{'go home'}</Link></sub></small>
       </div>
@@ -46,8 +58,8 @@ const BattleSummary: React.FC<BattleSummaryProps> = ({ location }) => {
 
   if (!battle) {
     return (<>
-      <div className={globalStyle.center}>
-        <code className={globalStyle.loader} />
+      <div className={globalStyles.center}>
+        <code className={globalStyles.loader} />
       </div>
     </>)
   }
@@ -55,7 +67,7 @@ const BattleSummary: React.FC<BattleSummaryProps> = ({ location }) => {
   return (<>
     <section
       className={[
-        globalStyle.container,
+        globalStyles.container,
         styles.battle__summary_section
       ].join(' ')}
     >

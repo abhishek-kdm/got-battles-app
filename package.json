@@ -1,7 +1,9 @@
 {
   "name": "got-battles",
   "private": true,
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "description": "Game of Thrones Battles (hiring challenge).",
   "version": "0.1.0",
   "author": "Abhishek Kadam <abhishekk19@gmail.com>",

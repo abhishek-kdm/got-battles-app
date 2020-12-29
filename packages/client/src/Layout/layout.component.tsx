@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import style from './layout.module.css';
+import styles from './layout.module.css';
 import '../styles/global.css';
 
 import Head from '../components/head';
@@ -12,7 +12,7 @@ const Layout: React.FC = ({ children }) => {
   return (<>
     <AppContext.Provider value={{ battle, setBattle }}>
       <Head />
-      <main className={style.main}>
+      <main className={styles.main}>
         <header>{children}</header>
       </main>
     </AppContext.Provider>

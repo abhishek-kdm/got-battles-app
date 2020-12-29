@@ -3,14 +3,14 @@ env:
   node: true
   es6: true
 extends:
-  - 'eslint:recommended'
-  - 'plugin:react/recommended'
-  - 'plugin:react-hooks/recommended'
-  - 'plugin:@typescript-eslint/eslint-recommended'
+  - "eslint:recommended"
+  - "plugin:@typescript-eslint/eslint-recommended"
+  - "plugin:react/recommended"
+  - "plugin:react-hooks/recommended"
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
-parser: '@typescript-eslint/parser'
+parser: "@typescript-eslint/parser"
 parserOptions:
   ecmaFeatures:
     jsx: true
@@ -18,8 +18,8 @@ parserOptions:
   sourceType: module
 plugins:
   - react
-  - 'react-hooks'
-  - '@typescript-eslint'
+  - "react-hooks"
+  - "@typescript-eslint"
 rules:
   quotes:
     - error
@@ -29,7 +29,7 @@ rules:
   eol-last:
     - error
     - always
-  'react/prop-types':
-    'off'
-  'react/display-name':
-    'off'
+  "react/prop-types":
+    "off"
+  "react/display-name":
+    "off"

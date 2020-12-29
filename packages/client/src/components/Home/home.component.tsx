@@ -3,18 +3,41 @@ import { PageProps as GatsbyPageProps, navigate, useStaticQuery, graphql } from 
 import Image from 'gatsby-image';
 
 import styles from './home.module.css';
-import globalStyle from '../../styles/global.module.css';
+import globalStyles from '../../styles/global.module.css';
 
 import AutoComplete from '../__pure__/AutoComplete/autocomplete.component';
 import { fetchJson, constructString, refreshableCallback } from '../../utils';
-
-import { SERVER_URI } from '../../configs';
+import { GraphqlOptions, SERVER_URI } from '../../configs';
 import { AppContext } from '../../context';
+
+
+const staticQuery = graphql`
+  query {
+    GotBanner: file(relativePath: { eq: "got-banner.png" }) {
+      childImageSharp {
+        fluid {
+          src
+          srcSet
+          sizes
+          aspectRatio
+        }
+      }
+    }
+  }
+`;
+
+const query = `
+query FilteredBattles($value: String) {
+  battles(param: $value) {
+    ${GraphqlOptions.commonQueryFields}
+  }
+}
+`;
 
 export interface SearchSectionProps extends GatsbyPageProps { }
 
 const SearchSection: React.FC<SearchSectionProps> = () => {
-  const { GotBanner } = useStaticQuery(gqlQuery);
+  const { GotBanner } = useStaticQuery(staticQuery);
 
   const { setBattle } = useContext(AppContext);
   const [value, setValue]     = useState<string>('');
@@ -31,15 +54,19 @@ const SearchSection: React.FC<SearchSectionProps> = () => {
     if (value.length) {
       // for smoother typing and avoiding unnecessary API calls.
       refreshableCallback(async () => {
-        const url = `${SERVER_URI}/battle/search?param=${value}`;
-        setOptions(await fetchJson(url));
+        const { data } = await fetchJson(SERVER_URI, {
+          method: 'POST',
+          body: JSON.stringify({ query, variables: { value } }),
+          headers: GraphqlOptions.commonHeaders,
+        });
+        setOptions(data.battles);
       }, 400);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   return (<>
-    <section className={[globalStyle.container, styles.home].join(' ')}>
+    <section className={[globalStyles.container, styles.home].join(' ')}>
       <div className={styles.title}>
         <Image
           className={styles.title__img}
@@ -50,7 +77,7 @@ const SearchSection: React.FC<SearchSectionProps> = () => {
         inputProps={searchInputProps}
         onSelect={(battle) => {
           setBattle(battle);
-          navigate(`/battle?id=${battle._id}`);
+          navigate(`/battle?id=${battle.id}`);
         }}
       >
         {(isOpen, optionProps, containerProps) => (
@@ -69,20 +96,4 @@ const SearchSection: React.FC<SearchSectionProps> = () => {
   </>);
 }
 
-const gqlQuery = graphql`
-  query {
-    GotBanner: file(relativePath: { eq: "got-banner.png" }) {
-      childImageSharp {
-        fluid {
-          src
-          srcSet
-          sizes
-          aspectRatio
-        }
-      }
-    }
-  }
-`;
-
 export default SearchSection;
-
