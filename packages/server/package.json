@@ -5,16 +5,20 @@
   "version": "0.1.0",
   "author": "Abhishek Kadam <abhishekk19@gmail.com>",
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "mongoose": "^5.10.9",
-    "netlify-lambda": "^2.0.2",
-    "saslprep": "^1.0.3"
+    "apollo-server": "^2.19.1",
+    "graphql": "^15.4.0",
+    "mongodb": "^3.6.3"
   },
   "devDependencies": {
+    "@types/graphql": "^14.5.0",
+    "@types/mongodb": "^3.6.3",
+    "apollo-server-types": "^0.6.2",
     "dotenv": "^8.2.0",
+    "nodemon": "^2.0.6",
     "path": "^0.12.7",
-    "serverless-http": "^2.6.0"
+    "ts-loader": "^8.0.12",
+    "typescript": "^4.1.3",
+    "webpack-cli": "^4.3.0"
   },
   "keywords": [
     "game-of-thrones",
@@ -23,10 +27,9 @@
   "license": "MIT",
   "scripts": {
     "gen": "mkdir -p public/html && cp index.html public/html",
-    "build": "yarn gen && netlify-lambda build lambda",
-    "serve": "netlify-lambda serve lambda",
-    "deploy": "netlify deploy",
-    "dev": "netlify dev"
+    "build": "yarn gen && weback --env NODE_ENV=production",
+    "start": "webpack --env NODE_ENV=development",
+    "watch": "nodemon ./public/api/index.js"
   },
   "repository": {
     "type": "git",

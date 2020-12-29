@@ -1,8 +1,0 @@
-[build]
-  deploy      = "public/html"
-  functions   = "public/functions"
-
-[dev]
-  command     = "yarn serve --port 4000"
-  targetPort  = 3000
-  framework   = "#custom"
