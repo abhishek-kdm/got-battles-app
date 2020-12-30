@@ -10,8 +10,8 @@ module.exports = ({ NODE_ENV }) => {
     watch: mode !== 'production',
     entry: resolve(__dirname, 'src', 'index.ts'),
     output: {
-      path: resolve(__dirname, 'public', 'api'),
-      filename: mode === 'production' ? '[name].[contenthash].js' : 'index.js',
+      path: resolve(__dirname, 'public'),
+      filename: 'main.js',
     },
     module: {
       rules: [

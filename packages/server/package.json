@@ -18,6 +18,7 @@
     "path": "^0.12.7",
     "ts-loader": "^8.0.12",
     "typescript": "^4.1.3",
+    "webpack": "^5.11.1",
     "webpack-cli": "^4.3.0"
   },
   "keywords": [
@@ -25,11 +26,14 @@
     "Game of Thrones"
   ],
   "license": "MIT",
+  "engines": {
+    "node": ">=12.x",
+    "npm": ">=6.x"
+  },
   "scripts": {
-    "gen": "mkdir -p public/html && cp index.html public/html",
-    "build": "yarn gen && weback --env NODE_ENV=production",
     "start": "webpack --env NODE_ENV=development",
-    "watch": "nodemon ./public/api/index.js"
+    "build": "webpack --env NODE_ENV=production",
+    "serve": "nodemon ./public/main.js"
   },
   "repository": {
     "type": "git",
