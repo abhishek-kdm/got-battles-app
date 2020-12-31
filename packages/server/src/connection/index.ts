@@ -6,7 +6,7 @@ export default async () => {
     require('dotenv').config({ path: resolve('.env') });
   }
 
-  const MONGOOSE_URI = process.env.MONGO_ATLAS_URI || '';
+  const MONGOOSE_URI = process.env.MONGOOSE_URI || '';
   const MONGOOSE_OPTIONS = {
     useNewUrlParser: true,
     useUnifiedTopology: true

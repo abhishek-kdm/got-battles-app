@@ -19,15 +19,23 @@ module.exports = ({ NODE_ENV }) => {
           test: /\.ts$/,
           exclude: /node_modules/,
           loader: 'ts-loader',
-          resolve: { extensions: ['.ts'] },
         },
         {
           test: /\.(graphql|gql)$/,
           exclude: /node_modules/,
           loader: 'graphql-tag/loader',
         },
+        {
+          test: /\.m?js/,
+          resolve: {
+              fullySpecified: false
+          }
+        },
       ],
     },
+    resolve: {
+      extensions: ['.wasm', '.js', '.mjs', '.ts', '.gql', '.graphql']
+    }
   }
 };
 

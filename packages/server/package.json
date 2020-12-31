@@ -6,11 +6,10 @@
   "author": "Abhishek Kadam <abhishekk19@gmail.com>",
   "dependencies": {
     "apollo-server": "^2.19.1",
-    "graphql": "^15.4.0",
+    "graphql": "14.7.0",
     "mongodb": "^3.6.3"
   },
   "devDependencies": {
-    "@types/graphql": "^14.5.0",
     "@types/mongodb": "^3.6.3",
     "apollo-server-types": "^0.6.2",
     "dotenv": "^8.2.0",
