@@ -4,7 +4,7 @@ on:
     branches:
       - "master"
     paths:
-      - 'packages/server/**'
+      - "packages/server/**"
       - ".github/workflows/deploy-server.yml"
 jobs:
   build-deploy-server:
@@ -13,7 +13,7 @@ jobs:
       - name: Setup SSH client and start ssh-agent.
         uses: webfactory/ssh-agent@v0.4.1
         with:
-          ssh-private-key: ${{ secrets.EC2_DEPLOY_KEY }}
+          ssh-private-key: ${{ secrets.HEROKU_SSH_KEY }}
 
       - name: Clone and checkout.
         uses: actions/checkout@v2
@@ -24,16 +24,11 @@ jobs:
         run: curl -o- -L https://yarnpkg.com/install.sh | bash
         shell: bash
 
-      - name: Install dependencies and build server.
-        run: yarn install && yarn server build
-
-      - name: Install Netlify CLI.
-        run: yarn global add netlify-cli
-
-      - name: Deploying Server to netlify functions.
+      - name: Deploying server to Heroku.
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        run: netlify deploy --prod
-
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_REMOTE: ${{ secrets.HEROKU_REMOTE }}
+        run: |
+          git remote add heroku "$HEROKU_REMOTE"
+          yarn heroku-push master
 

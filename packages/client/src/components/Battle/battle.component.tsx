@@ -7,7 +7,7 @@ import globalStyles from '../../styles/global.module.css';
 import KingdomSummary from '../__pure__/KingdomSummary/kingdomSummary.component';
 import { AppContext } from '../../context';
 import { fetchJson, pareseUrlParams } from '../../utils';
-import { GraphqlOptions, SERVER_URI } from '../../configs';
+import { GQLOptions, GQLRequestInit, SERVER_URI } from '../../configs';
 
 const Note: React.FC<{ children: string }> = ({ children }) => {
   return (children && children.length) ? (<>
@@ -19,7 +19,7 @@ const Note: React.FC<{ children: string }> = ({ children }) => {
 export const query = `
 query FilteredBattles($id: String!) {
   battle(id: $id) {
-    ${GraphqlOptions.commonQueryFields}
+    ${GQLOptions.commonQueryFields}
   }
 }
 `;
@@ -34,11 +34,8 @@ const BattleSummary: React.FC<BattleSummaryProps> = ({ location }) => {
     if (!battle) {
       const id = pareseUrlParams(location.search).id;
       if (id) {
-        fetchJson(SERVER_URI, {
-          method: 'POST',
-          body: JSON.stringify({ query, variables: { id } }),
-          headers: GraphqlOptions.commonHeaders,
-        })
+        const body = JSON.stringify({ query, variables: { id } });
+        fetchJson(SERVER_URI, GQLRequestInit(body))
           .then(({ data }: any) => setBattle(data.battle))
           .catch(() => setError(true));
       } else {
@@ -63,7 +60,7 @@ const BattleSummary: React.FC<BattleSummaryProps> = ({ location }) => {
       </div>
     </>)
   }
-
+//
   return (<>
     <section
       className={[

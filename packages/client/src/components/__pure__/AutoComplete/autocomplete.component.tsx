@@ -1,24 +1,26 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useMemo } from 'react';
 import styles from './autocomplete.module.css';
 
 import { useKeyPress } from '../../../utils/hooks';
 import { autocompleteNavigate } from '../../../utils';
 
 
-interface AutoCompleteProps {
-  inputProps: React.InputHTMLAttributes<HTMLInputElement>
-  onSelect: (option: any) => void
+interface AutoCompleteProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  loading: boolean,
+  onSelect: (option: any) => void,
   children: (
     isOpen: (a: any[]) => boolean,
-    optionProps: any,
-    containerProps: any
+    optionProps: (options: any, key: number) => React.HTMLAttributes<HTMLElement>,
+    containerProps: () => React.HTMLAttributes<HTMLUListElement> & React.ClassAttributes<HTMLUListElement>,
   ) => JSX.Element | null
 }
 
 const AutoComplete: React.FC<AutoCompleteProps> = ({
-  inputProps,
+  loading,
   onSelect,
   children,
+  className,
+  ...inputProps
 }) => {
   // hook tracking keypress.
   const upArrowPressed = useKeyPress(38);
@@ -27,11 +29,9 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   const auInput = useRef<HTMLInputElement>(null);
   const auContainer = useRef<HTMLElement>(null);
 
-  const { value } = inputProps;
-
-  const isOpen = useCallback((options) => {
-    return (value as string).length > 0 && options.length > 0
-  }, [value]);
+  const isOpen = useCallback((options) => (
+    (inputProps.value as string).length > 0 && options.length > 0
+  ), [inputProps.value]);
 
   const optionProps = (option: any, key: string | number) => ({
     key,
@@ -59,9 +59,15 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
     }
   }, [upArrowPressed]);
 
+  const classes = useMemo(() => (
+    ([styles.autocomplete])
+    .concat(className || '')
+    .concat(loading ? styles.loading : '')
+  ), [className, loading]);
+
   return (<>
-    <div className={styles.autocomplete}>
-      <input {...inputProps} tabIndex={1} ref={auInput} />
+    <div className={classes.join(' ').trim()}>
+      <input {...inputProps} className={styles.autocompleteinput} tabIndex={1} ref={auInput} />
       {children(isOpen, optionProps, containerProps)}
     </div>
   </>);

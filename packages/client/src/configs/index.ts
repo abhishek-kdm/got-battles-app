@@ -1,16 +1,22 @@
 import Package from '../../../../package.json';
+import ServerPackage from '../../../server/package.json';
 
 export const SERVER_URI = process.env.NODE_ENV === 'production'
-  ? `https://${Package.name}.netlify.app/`
+  ? `https://${Package.name}-${ServerPackage.name}.herokuapp.com`
   : `http://localhost:4000`;
 
-export const GraphqlOptions = {
-  commonHeaders: {
+export const GQLRequestInit = (body: string) => ({
+  body,
+  method: 'POST',
+  headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
     'Accept-Encoding': 'gzip, deflate, hr',
     'Connection': 'keep-alive',
-  },
+  }
+} as RequestInit);
+
+export const GQLOptions = {
   commonQueryFields: `
     id
     year

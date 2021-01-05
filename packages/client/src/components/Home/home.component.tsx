@@ -7,9 +7,8 @@ import globalStyles from '../../styles/global.module.css';
 
 import AutoComplete from '../__pure__/AutoComplete/autocomplete.component';
 import { fetchJson, constructString, refreshableCallback } from '../../utils';
-import { GraphqlOptions, SERVER_URI } from '../../configs';
+import { GQLOptions, GQLRequestInit, SERVER_URI } from '../../configs';
 import { AppContext } from '../../context';
-
 
 const staticQuery = graphql`
   query {
@@ -29,7 +28,7 @@ const staticQuery = graphql`
 const query = `
 query FilteredBattles($value: String) {
   battles(param: $value) {
-    ${GraphqlOptions.commonQueryFields}
+    ${GQLOptions.commonQueryFields}
   }
 }
 `;
@@ -42,6 +41,7 @@ const SearchSection: React.FC<SearchSectionProps> = () => {
   const { setBattle } = useContext(AppContext);
   const [value, setValue]     = useState<string>('');
   const [options, setOptions] = useState<any>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const searchInputProps = useMemo(() => ({
     value,
@@ -52,14 +52,14 @@ const SearchSection: React.FC<SearchSectionProps> = () => {
 
   useEffect(() => {
     if (value.length) {
+      const body = JSON.stringify({ query, variables: { value } });
+
       // for smoother typing and avoiding unnecessary API calls.
       refreshableCallback(async () => {
-        const { data } = await fetchJson(SERVER_URI, {
-          method: 'POST',
-          body: JSON.stringify({ query, variables: { value } }),
-          headers: GraphqlOptions.commonHeaders,
-        });
+        setLoading(true);
+        const { data } = await fetchJson(SERVER_URI, GQLRequestInit(body));
         setOptions(data.battles);
+        setLoading(false);
       }, 400);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -73,8 +73,8 @@ const SearchSection: React.FC<SearchSectionProps> = () => {
           fluid={{ ...GotBanner.childImageSharp.fluid }}
         />
       </div>
-      <AutoComplete
-        inputProps={searchInputProps}
+      <AutoComplete {...searchInputProps}
+        loading={loading}
         onSelect={(battle) => {
           setBattle(battle);
           navigate(`/battle?id=${battle.id}`);
@@ -84,7 +84,7 @@ const SearchSection: React.FC<SearchSectionProps> = () => {
           isOpen(options) ? (
             <ul {...containerProps()}>
               {options.map((option: any, key: number) => (
-                <li {...optionProps(option, key)}>
+                <li key={key} {...optionProps(option, key)}>
                   {constructString(option)}
                 </li>
               ))}
