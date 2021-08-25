@@ -6,13 +6,14 @@
   "author": "Abhishek Kadam <abhishekk19@gmail.com>",
   "dependencies": {
     "apollo-server": "^2.19.1",
-    "graphql": "14.7.0",
+    "graphql": "^15.5.1",
     "mongodb": "^3.6.3"
   },
   "devDependencies": {
     "@types/mongodb": "^3.6.3",
     "apollo-server-types": "^0.6.2",
     "dotenv": "^8.2.0",
+    "graphql-tag": "^2.12.5",
     "nodemon": "^2.0.6",
     "path": "^0.12.7",
     "ts-loader": "^8.0.12",
@@ -31,7 +32,7 @@
   },
   "scripts": {
     "start": "webpack --env NODE_ENV=development",
-    "build": "webpack --env NODE_ENV=production",
+    "build": "rm -rf public && webpack --env NODE_ENV=production",
     "serve": "nodemon ./public/main.js"
   },
   "repository": {

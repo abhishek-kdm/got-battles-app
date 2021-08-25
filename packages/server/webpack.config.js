@@ -27,14 +27,12 @@ module.exports = ({ NODE_ENV }) => {
         },
         {
           test: /\.m?js/,
-          resolve: {
-              fullySpecified: false
-          }
+          resolve: { fullySpecified: false },
         },
       ],
     },
     resolve: {
-      extensions: ['.wasm', '.js', '.mjs', '.ts', '.gql', '.graphql']
+      extensions: ['.wasm', '.js', '.mjs', '.ts', '.gql', '.graphql'],
     }
   }
 };

@@ -10,25 +10,16 @@ jobs:
   build-deploy-server:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup SSH client and start ssh-agent.
-        uses: webfactory/ssh-agent@v0.4.1
-        with:
-          ssh-private-key: ${{ secrets.HEROKU_SSH_KEY }}
-
       - name: Clone and checkout.
         uses: actions/checkout@v2
-        with:
-          persist-credentials: false
-
-      - name: Installing Yarn.
-        run: curl -o- -L https://yarnpkg.com/install.sh | bash
-        shell: bash
 
       - name: Deploying server to Heroku.
+        shell: bash
         env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          HEROKU_REMOTE: ${{ secrets.HEROKU_REMOTE }}
+          HEROKU_SSH_KEY: ${{ secrets.HEROKU_SSH_KEY }}
+          GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
         run: |
-          git remote add heroku "$HEROKU_REMOTE"
-          yarn heroku-push master
-
+          eval $(ssh-agent -s)
+          ssh-add - <<< "$HEROKU_SSH_KEY"
+          git remote add heroku ssh://git@heroku.com/got-battles-server.git
+          git push heroku `git subtree split --prefix=packages/server master`:master --force

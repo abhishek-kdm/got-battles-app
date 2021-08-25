@@ -15,8 +15,7 @@
   "license": "MIT",
   "scripts": {
     "server": "yarn workspace server",
-    "client": "yarn workspace client",
-    "heroku-push": "git subtree push --prefix=packages/server heroku"
+    "client": "yarn workspace client"
   },
   "repository": {
     "type": "git",

@@ -12,6 +12,7 @@ let Battle: Collection<BattleDBSchema>;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  cors: false,
   context: async () => {
     if (!Battle) {
       const DB = await makeConnection();
