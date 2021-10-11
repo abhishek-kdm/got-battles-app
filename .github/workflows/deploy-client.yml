@@ -1,5 +1,6 @@
 name: deploy-client
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
